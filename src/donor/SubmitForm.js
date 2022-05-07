@@ -1,7 +1,11 @@
 import React from 'react';
-// import db from '../firebase';
-import {addPost} from '../helper/postHelper';
+import {addPost, submitPost} from '../helper/postHelper';
+import { auth } from '../firebase-config';
+import { useNavigate } from "react-router-dom";
+
 export default function SubmitForm() {
+
+  const navigate = useNavigate();
 
   const [name,updateName] = React.useState('');
   const [type,updateType] = React.useState('veg');
@@ -10,16 +14,22 @@ export default function SubmitForm() {
   const [address,updateAddress] = React.useState('');
   const [delivery,updateDelivery] = React.useState('deliver');
   
+  // (
+  //   () => {
+  //     console.log('data',auth.currentUser.uid);
+  //   }
+  // )()
 
   const submitPost = (e) => {
-    console.log("submitPost",name,type,quantity,freshFor,address,delivery);
-    addPost(name,type,quantity,freshFor,address,delivery);
+    // submitPost(name,type,quantity,freshFor,address,delivery);
+    addPost(name,type,quantity,freshFor,address,delivery,auth.currentUser.uid);
+    navigate('/receivers')
   }
 
   return (<div className="mx-auto round-c bg-lightblue px-4 py-3">
               <div className="form-group">
                 <h3 className="text-center">Share Food</h3>
-                <label className="text-darkblue py-1 font">Name:</label>
+                <label className="text-darkblue py-1 font">Your Name:</label>
                 <input type="text" className="form-control" onChange={e => updateName(e.target.value)} name="name"></input>
                 <small>Your name or Organisation name.</small>
                 <br />
@@ -30,7 +40,7 @@ export default function SubmitForm() {
                   </option>
                   <option value="nveg">Non-Veg</option>
                 </select>
-                <label className="text-darkblue py-2 font">
+                <label class Name="text-darkblue py-2 font">
                   Quantity of food: (No. of People)
                 </label>
                 <input
@@ -55,13 +65,12 @@ export default function SubmitForm() {
                 <small>Enter the number in hours.</small>
                 <br />
               </div>
-
               <div className="form-group py-2">
                 <label for="location" className="text-darkblue font py-2">
                   Address
                 </label>
                 <textarea
-                  id="location"
+                  id="address"
                   onChange={e => updateAddress(e.target.value)}
                   className="form-control font"
                   name="message"

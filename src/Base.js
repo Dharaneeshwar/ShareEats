@@ -6,7 +6,7 @@ function Base({activeNav = "receiver",children}) {
   // set state for a variable 
   
   return (
-      <div >
+      <div>
         <NavBar activeNav = {activeNav}/>
           {children}
         <Footer/>

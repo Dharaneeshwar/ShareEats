@@ -1,10 +1,19 @@
 import React from "react";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../helper/authHelper";
+import { auth } from "../firebase-config";
 
 function Navbar(props) {
   
   const navigate = useNavigate();
+
+  const logout = () => {
+    auth.signOut();
+    localStorage.removeItem("uid");
+    localStorage.removeItem("authObj");
+    navigate("/");
+  }
 
   return (
     <div>
@@ -21,24 +30,13 @@ function Navbar(props) {
                     <li className="nav-item">
                         <a className={"nav-link " + (props.activeNav == "receiver" ? 'active' : '')} onClick={() => navigate('/receivers')}>Need Food</a>
                     </li>
-                    {/* <li className="nav-item dropdown">
-                        <p className="nav-link dropdown-toggle mb-0" data-bs-toggle="dropdown">Live Projects</p>
-                        <ul className="dropdown-menu p-0">
-                            <li><a className="dropdown-item py-3 px-4 font" href="https://medworld.daranip.com/"> Med
-                                    World</a></li>
-                            <li><a className="dropdown-item py-3 px-4 font" href="http://legitgoods.herokuapp.com/"> Legit
-                                    Goods</a></li>
-                            <li><a className="dropdown-item py-3 px-4 font" href="https://todo.daranip.com/"> Todo</a></li>
-                            <li><a className="dropdown-item py-3 px-4 font" href="https://covid.daranip.com/"> Covid
-                                    Project</a></li>
-                            <li><a className="dropdown-item py-3 px-4 font" href="https://twitter.daranip.com/"> Twitter
-                                    Clone</a></li>
-                        </ul>
-                    </li> */}
+                    <li className="nav-item">
+                        <a className={"nav-link " + (props.activeNav == "logs" ? 'active' : '')} onClick={() => navigate('/logs')}>Logs</a>
+                    </li>
           </ul>
         </div>
         <span className="navbar-text litle-bigger">
-          <div className="btn btn-darkblue btn-lg">Sign out</div>
+          <div onClick={logout} className="btn btn-darkblue btn-lg">Sign out</div>
           {/* <i class="fas fa-cog" style={{color:'black', fontSize:'1.5rem',marginTop:'0.3rem'}}></i> */}
         </span>
       </nav>
