@@ -134,7 +134,7 @@ export let getPosts = async (page = "donar") => {
   return promise;
 };
 
-export let getExtendedPosts = async () => {
+// export let getExtendedPosts = async () => {
   // let posts = [];
   // const q = query(
   //   collection(db, "posts"),
@@ -153,7 +153,7 @@ export let getExtendedPosts = async () => {
   // });
   // console.log(posts);
   // return posts;
-};
+// };
 
 export let getMyPosts = async (uid) => {
   let posts = [];

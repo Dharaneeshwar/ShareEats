@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Base from "../Base";
 import Post from "../common/Post";
-import { getPosts, getExtendedPosts } from "../helper/postHelper";
+import { getPosts} from "../helper/postHelper";
 import "./Receiver.css";
 
 export default function Receiver() { 
 
   const [posts,setPosts] = useState([]);
-  const [extendedPosts,setExtendedPosts] = useState([]);
+  // const [extendedPosts,setExtendedPosts] = useState([]);
 
   useEffect(() => {
     (async () => {
